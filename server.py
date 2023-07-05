@@ -1,14 +1,15 @@
-from flask import Flask  
+from flask import Flask, render_template
+
 
 app = Flask(__name__)  
 
-@app.route('/')          
+@app.route('/play')          
 def hello_world():
-    return 'Hello World!' 
+    return render_template("index.html")
 
-@app.route('/dojo')
-def success():
-    return "Dojo" 
+@app.route('/play/<string:color>/<int:num>')
+def success(color,num):
+    return render_template("index.html", color=color, num = num)
 
 @app.route('/say/flask')
 def hello():
@@ -22,6 +23,12 @@ def based():
 def repeat(name,num):
     return f"Hi, {name * num} "
 
+@app.route('/testing/<string:name>/<int:num>')
+def big_test(name,num):
+    return render_template("hello.html", name=name,num=num)
+
 if __name__=="__main__":    
     app.run(debug=True)     
+
+
 
